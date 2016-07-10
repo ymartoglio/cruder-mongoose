@@ -1,0 +1,21 @@
+{
+  "name": "cruder-mongoose",
+  "version": "0.1.0",
+  "description": "Quick CRUD with mongoose schema/model",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "crud",
+    "mongoose",
+    "rest",
+    "api"
+  ],
+  "author": "ymartoglio",
+  "license": "MIT",
+  "dependencies": {
+    "merge": "^1.2.0",
+    "promise": "^7.1.1"
+  }
+}
