@@ -26,7 +26,6 @@ var defaultOptions = {
 const CRUDER_VERSION = '0.1';
 
 function CRUDer(options){
-    console.log("STATUS_CODE", STATUS_CODES);
     this.version = CRUDER_VERSION;
 
     options = options || {};
@@ -60,7 +59,7 @@ CRUDer.prototype.answers = function(user,action,somethingParticular){
             }
         }else{
             //console.log("somethingModel does not exists");
-            return Promise.reject(output.message(500,"Something goes wrong with : "+somethingParticular.criteria.collection+" get out of the BOAT NOOOOOW !!!!!"));
+            return Promise.reject(output.message(500,"Something goes wrong with : "+somethingParticular.criteria.collection+" get out of the BOAT NOOOOOW !!!!!",null));
         }
         if(answer === null) throw new Error("[NO_ANSWER]");
         return answer;

@@ -58,9 +58,9 @@ function __handleMongoError(error){
 function __handleMongooseError(error) {
     var formatError = function (error) {
         if (error.message && (error.kind || error.type)) {
-            return {message: error.message || 'no message', type: error.type || error.kind || 'no type'};
+            return {message: error.message || "[NO_MESSAGE]", type: error.type || error.kind || "[NO_TYPE]"};
         }
-        return {message: "no message", type: "no type"};
+        return {message: "[NO_MESSAGE]", type: "[NO_TYPE]"};
     };
 
     var purgedErrors = [];

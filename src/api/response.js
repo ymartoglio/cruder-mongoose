@@ -15,7 +15,7 @@ const mongooseProxy = require('./mongoose.js'),
  */
 exports.read = function(model,something,user){
     var promiseStuff = mongooseProxy.find(model,
-        _setDefaultAccessCondition(something.request.condition,user),
+        _setDefaultAccessCondition(something.request.condition,user,something.criteria),
         _setDefaultProjection(model,something.request.fields,user));
     if(promiseStuff){
         return promiseStuff.then(function(stuff){
@@ -35,9 +35,12 @@ exports.read = function(model,something,user){
     return null;
 }
 
-function _setDefaultAccessCondition(condition,user){
+function _setDefaultAccessCondition(condition,user,criteria){
     if(condition){
         condition._creator = user._id;
+        if(criteria && criteria.collectionId != ""){
+            condition._id = criteria.collectionId;
+        }
     }
     return condition;
 }
@@ -59,7 +62,7 @@ function _setDefaultProjection(model,projection,user){
  */
 exports.write =function(model,something,user){
     var promiseStuff = mongooseProxy.write(model,
-        something.request.condition,
+        _setDefaultCondition(something.request.condition,something.criteria),
         _setDefaultDataWrite(something.request.data,user),
         user);
     if(promiseStuff){
@@ -81,6 +84,13 @@ exports.write =function(model,something,user){
     return null;
 };
 
+function _setDefaultCondition(condition,criteria){
+    if(condition && criteria.collectionId != ""){
+        condition._id = criteria.collectionId;
+    }
+    return condition;
+}
+
 function _setDefaultDataWrite(stuff,user){
     if(stuff){
         stuff._creator = user._id;
@@ -98,7 +108,7 @@ function _setDefaultDataWrite(stuff,user){
  */
 exports.delete = function(model,something,user){
     var promiseStuff = mongooseProxy.delete(model,
-        something.request.condition,
+        _setDefaultCondition(something.request.condition,something.criteria),
         user);
     if(promiseStuff){
         return promiseStuff.then(function(stuff){
