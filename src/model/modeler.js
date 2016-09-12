@@ -19,7 +19,7 @@ module.exports = function(mongoose,modelSchema,modelName,options){
     options = merge({},defaultOptions,options || {});
     var schema = new mongoose.Schema(modelSchema),
         staticPropertu, property,trigger;
-
+    
     _applyStatic(schema,'projection',options.projections);
     
     for(var propertyName in options.statics){
@@ -28,6 +28,7 @@ module.exports = function(mongoose,modelSchema,modelName,options){
             _applyStatic(schema,propertyName,staticPropertu);
         }
     }
+
     //Schema validation
     for(var propertyName in options.validators){
         if(options.validators.hasOwnProperty(propertyName)){
