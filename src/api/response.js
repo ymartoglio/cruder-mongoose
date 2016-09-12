@@ -10,7 +10,7 @@ const mongooseProxy = require('./mongoose.js'),
  * Look for data that matches the user request
  * @param model {MongooseModel}
  * @param something {Object}
- * @param user {Object} - Must contain at least an _id property (corresponding to a _creator property)
+ * @param user {Object} - Must contain at least an _id property (corresponding to a _creator property available in the mongoose's model)
  * @returns {Promise|NULL} - promise and in the end a [message] object
  */
 exports.read = function(model,something,user){
