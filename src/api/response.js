@@ -25,11 +25,11 @@ exports.read = function(model,something,user){
                 if (stuff) {
                     return output.message(200, "[STUFF_FOUND]", stuff);
                 } else {
-                    return output.message(404, "Nothing's found for _id " + something.criteria.collectionId);
+                    return output.message(404, "[NOTHING_FOUND_FOR_ID]" + something.criteria.collectionId);
                 }
             }
         },function(err){
-            return output.message(404,"Nothing's found for _id "+something.criteria.collectionId,err);
+            return output.message(404,"[NOTHING_FOUND_FOR_ID]"+something.criteria.collectionId,err);
         });
     }
     return null;
